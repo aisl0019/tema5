@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+    <div id="liste"></div>
+
+    <script>
+        let dyr = [{
+                "navn": "frø",
+                "type": "amfibie",
+                "levested": "vandhul",
+                "billede": "http://helf-kea.dk/test/fr%C3%B8.png"
+            },
+            {
+                "navn": "gris",
+                "type": "pattedyr",
+                "levested": "grisefarm",
+                "billede": "http://helf-kea.dk/test/gris.png"
+            },
+            {
+                "navn": "ræv",
+                "type": "pattedyr",
+                "levested": "skoven",
+                "billede": "http://helf-kea.dk/test/fox.png"
+            },
+            {
+                "navn": "sild",
+                "type": "fisk",
+                "levested": "havet",
+                "billede": "http://helf-kea.dk/test/sild.jpg"
+            },
+            {
+                "navn": "krokodille",
+                "type": "krybdyr",
+                "levested": "floden",
+                "billede": "http://helf-kea.dk/test/kroko.jpg"
+            }
+        ];
+
+        // nu skal vi vise vores array i HTML'en
+
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            let dest = document.querySelector("#liste");
+
+            dyr.forEach(dyr => {
+                dest.innerHTML += `${dyr.navn} ${dyr.type} ${dyr.levested} ${dyr.billede} <br>`;
+            })
+        }
+    </script>
+</body>
+
+</html>

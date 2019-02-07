@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+    <!-- Dette er gridet til vores dyr -->
+
+    <div id="liste">
+
+        <div class="dyr">
+            <h3></h3>
+            <p>Type: </p>
+            <p>Levested: </p>
+            <img src="" alt="">
+        </div>
+
+        <div class="dyr">
+            <h3></h3>
+            <p>Type: </p>
+            <p>Levested: </p>
+            <img src="" alt="">
+        </div>
+
+        <div class="dyr">
+            <h3></h3>
+            <p>Type: </p>
+            <p>Levested: </p>
+            <img src="" alt="">
+        </div>
+
+        <div class="dyr">
+            <h3></h3>
+            <p>Type: </p>
+            <p>Levested: </p>
+            <img src="" alt="">
+        </div>
+
+        <div class="dyr">
+            <h3></h3>
+            <p>Type: </p>
+            <p>Levested: </p>
+            <img src="" alt="">
+        </div>
+
+    </div>
+
+    <script>
+        // Her er vores dyr defineret
+
+        let dyr = [{
+                "navn": "frø",
+                "type": "amfibie",
+                "levested": "vandhul",
+                "billede": "http://helf-kea.dk/test/fr%C3%B8.png"
+            },
+            {
+                "navn": "gris",
+                "type": "pattedyr",
+                "levested": "grisefarm",
+                "billede": "http://helf-kea.dk/test/gris.png"
+            },
+            {
+                "navn": "ræv",
+                "type": "pattedyr",
+                "levested": "skoven",
+                "billede": "http://helf-kea.dk/test/fox.png"
+            },
+            {
+                "navn": "sild",
+                "type": "fisk",
+                "levested": "havet",
+                "billede": "http://helf-kea.dk/test/sild.jpg"
+            },
+            {
+                "navn": "krokodille",
+                "type": "krybdyr",
+                "levested": "floden",
+                "billede": "http://helf-kea.dk/test/kroko.jpg"
+            }
+        ];
+
+        // Nu skal listen med dyrene placeres i gridet
+
+        document.addEventListener("DOMContentLoader", start);
+
+        function start() {
+            let dest = document.querySelector("#liste");
+
+            function visDyr() {
+                dyr.forEach(dyr => {
+                    dest.innerHTML +=
+                        `<div class="dyr">
+                        <h3>${dyr.navn}</h3> <p class="type">${dyr.type}</p> <p class="levested">${dyr.levested}</p> <img src="${dyr.billede}"> <br>
+                    </div>`;
+                })
+            }
+        }
+
+
+        visDyr();
+    </script>
+</body>
+
+</html>

@@ -12,49 +12,12 @@
 
     <!-- Dette er gridet til vores dyr -->
 
-    <div id="liste">
-
-        <div class="dyr">
-            <h3></h3>
-            <p>Type: </p>
-            <p>Levested: </p>
-            <img src="" alt="">
-        </div>
-
-        <div class="dyr">
-            <h3></h3>
-            <p>Type: </p>
-            <p>Levested: </p>
-            <img src="" alt="">
-        </div>
-
-        <div class="dyr">
-            <h3></h3>
-            <p>Type: </p>
-            <p>Levested: </p>
-            <img src="" alt="">
-        </div>
-
-        <div class="dyr">
-            <h3></h3>
-            <p>Type: </p>
-            <p>Levested: </p>
-            <img src="" alt="">
-        </div>
-
-        <div class="dyr">
-            <h3></h3>
-            <p>Type: </p>
-            <p>Levested: </p>
-            <img src="" alt="">
-        </div>
-
-    </div>
+    <div id="liste"></div>
 
     <script>
         // Her er vores dyr defineret
 
-        let dyr = [{
+        let alleDyr = [{
                 "navn": "frø",
                 "type": "amfibie",
                 "levested": "vandhul",
@@ -94,11 +57,14 @@
             let dest = document.querySelector("#liste");
 
             function visDyr() {
-                dyr.forEach(dyr => {
+                alleDyr.forEach(dyr => {
                     dest.innerHTML +=
                         `<div class="dyr">
-                        <h3>${dyr.navn}</h3> <p class="type">${dyr.type}</p> <p class="levested">${dyr.levested}</p> <img src="${dyr.billede}"> <br>
-                    </div>`;
+                        <h3>${dyr.navn}</h3>
+                        <img src="${dyr.billede}">
+                        <p>Type: ${dyr.type}</p>
+                        <p>Levested: ${dyr.levested}</p>
+                        </div>`;
                 })
             }
         }

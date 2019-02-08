@@ -27,7 +27,7 @@
             background: red;
         }
 
-        h3 {
+        h2 {
             padding: 5%;
             font-family: 'Arial', sans-serif;
             text-transform: uppercase;
@@ -68,7 +68,7 @@
                 allePersoner.forEach(person => {
                     dest.innerHTML += `
                     <div class="person">
-                        <h3>Navn: ${person.navn}</h3>
+                        <h2>Navn: ${person.navn}</h2>
                         <img src="${person.billede}">
                         <p>GitHub: ${person.github} <br> Alder: ${person.alder} <br> Køn: ${person.køn} <br> Email: ${person.email} <br> Hold: ${person.hold} <br> Historie: ${person.historie} <br></p>
                     </div>`

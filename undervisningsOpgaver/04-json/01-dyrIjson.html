@@ -11,6 +11,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
         }
+
     </style>
 
 
@@ -40,8 +41,8 @@
                 alleDyr.forEach(dyr => {
                     dest.innerHTML += `
                 <div class="dyr">
-                    <h3>${dyr.navn}<h3>
-                    <img src= "${dyr.billede}">
+                <h3>${dyr.navn}<h3>
+                <img src= "${dyr.billede}">
                 <p>Type: ${dyr.type}<p>
                 <p>Levested: ${dyr.levested}<p>
                 <div> `;
@@ -50,6 +51,7 @@
             getJson()
 
         }
+
     </script>
 </body>
 

@@ -65,6 +65,10 @@
             margin: auto;
         }
 
+        #indhold img {
+            width: 50%;
+        }
+
         #luk {
             box-sizing: border-box;
             text-align: right;
@@ -80,6 +84,12 @@
 </head>
 
 <body>
+
+    <div id="popup">
+        <div id="luk"><button>X</button></div>
+        <div id="indhold"></div>
+    </div>
+
     <header>
         <img src="imgs/header.png" alt="header">
 
@@ -95,11 +105,6 @@
     </header>
 
     <main>
-        <div id="popup">
-            <div id="luk"></div>
-            <div id="indhold"></div>
-        </div>
-
         <section id="liste"></section>
     </main>
 
@@ -138,11 +143,11 @@
 
                         function åbn() {
                             document.querySelector("#indhold").innerHTML = `
-                            <div class="ret">
-                                <img src="imgs/small/${ret.billede}-sm.jpg">
-                                <h2>${ret.navn}</h2>
-                                <p>${ret.kort} <br><br> Pris: ${ret.pris},-</p>
-                            </div>`;
+                    <div class="ret">
+                        <img src="imgs/large/${ret.billede}.jpg">
+                        <h2>${ret.navn}</h2>
+                        <p>Beskrivelse: ${ret.lang} <br><br> Pris: ${ret.pris},-</p>
+                    </div>`;
                             document.querySelector("#popup").style.display = "block";
                         }
                     }

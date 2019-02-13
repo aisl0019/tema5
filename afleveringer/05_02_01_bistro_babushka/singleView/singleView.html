@@ -55,8 +55,8 @@
         let urlParams = new URLSearchParams(window.location.search);
         let github = urlParams.get("github");
 
-        let allePersoner = [];
-        let person;
+        let alleRetter = [];
+        let ret;
 
         document.addEventListener("DOMContentLoaded", start);
 
@@ -64,27 +64,27 @@
             let dest = document.querySelector("#liste");
 
             async function getJson() {
-                let jsonData = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1OLlD_GRoz71piHvnW306omRAyHS7vtLOILQt-K0YF_c");
-                allePersoner = await jsonData.json();
+                let jsonData = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1jxxxFoWBuMJ1qhQ9BQIAyKHmP38XtAF9_sQr0xo5JLo");
+                alleRetter = await jsonData.json();
 
-                personer.forEach(obj => {
-                    person = obj;
+                retter.forEach(obj => {
+                    ret = obj;
                 })
 
-                åbn();
+                visRetter();
             }
 
             function åbn() {
                 document.querySelector("#indhold").innerHTML = `
-                    <article class="person">
-                        <h2>Navn: ${person.navn}</h2>
-                        <img src="${person.billede}">
-                        <p>GitHub: <a href="https://github.com/${person.github}">Github</a> <br> Alder: ${person.alder} <br> Hold: ${person.hold} <br> Historie: ${person.historie} <br> Køn: ${person.køn} <br></p>
-                    </article>`;
+                    <div class="ret">
+                        <img src="imgs/small/${ret.billede}-sm.jpg">
+                        <h2>${ret.navn}</h2>
+                        <p>Beskrivelse: ${ret.lang} <br><br> Pris: ${ret.pris},-</p>
+                    </div>`;
             };
 
             document.querySelector("#luk button").addEventListener("click", () => {
-                location.href = "05-kald.html"
+                location.href = "kald.html"
             });
 
             getJson();

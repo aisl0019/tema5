@@ -71,11 +71,6 @@
     </header>
 
     <main>
-        <div id="popup">
-            <div id="luk"><button>X</button></div>
-            <div id="indhold"></div>
-        </div>
-
         <section id="liste">
             <article class="person"></article>
             <article class="person"></article>
@@ -117,7 +112,7 @@
                             </article>`;
                         dest.insertAdjacentHTML("beforeend", template);
                         dest.lastElementChild.addEventListener("click", () => {
-                            location.href = "06-single.html?github=" + person.github;
+                            location.href = "07-singleView.html?github=" + person.github;
                         });
 
                     }

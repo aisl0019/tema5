@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <style>
+        /* SINGLE VIEW */
+        #singleview {
+            width: 100vw;
+            height: 100vh;
+            background-color: red;
+        }
+
+        #indhold {
+            box-sizing: border-box;
+            background-color: lightgray;
+            width: 90vw;
+            height: 90vh;
+            margin: auto;
+        }
+
+        #indhold img {
+            height: 360px;
+        }
+
+        #luk {
+            box-sizing: border-box;
+            background-color: lightgray;
+            text-align: right;
+            padding-right: 1em;
+        }
+
+        #luk button {
+            font-size: 2em;
+        }
+
+    </style>
+
+
+</head>
+
+<body>
+    <main>
+        <div id="singleview">
+            <div id="luk"><button>X</button></div>
+            <div id="indhold"></div>
+        </div>
+    </main>
+
+    <footer></footer>
+
+    <script>
+        let urlParams = new URLSearchParams(window.location.search);
+        let github = urlParams.get("github");
+
+        let allePersoner = [];
+        let person;
+
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            let dest = document.querySelector("#liste");
+
+            async function getJson() {
+                let jsonData = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1OLlD_GRoz71piHvnW306omRAyHS7vtLOILQt-K0YF_c");
+                allePersoner = await jsonData.json();
+
+                personer.forEach(obj => {
+                    person = obj;
+                })
+
+                åbn();
+            }
+
+            function åbn() {
+                document.querySelector("#indhold").innerHTML = `
+                    <article class="person">
+                        <h2>Navn: ${person.navn}</h2>
+                        <img src="${person.billede}">
+                        <p>GitHub: <a href="https://github.com/${person.github}">Github</a> <br> Alder: ${person.alder} <br> Hold: ${person.hold} <br> Historie: ${person.historie} <br> Køn: ${person.køn} <br></p>
+                    </article>`;
+            };
+
+            document.querySelector("#luk button").addEventListener("click", () => {
+                location.href = "05-kald.html"
+            });
+
+            getJson();
+
+        }
+
+    </script>
+</body>
+
+</html>

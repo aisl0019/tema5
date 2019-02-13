@@ -10,6 +10,7 @@
         #liste {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
+
         }
 
         img {
@@ -46,7 +47,33 @@
 
         .ret:nth-child(odd) {
             background-color: lightgray;
+        }
 
+        /* POPUP */
+        #popup {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            background-color: red;
+        }
+
+        #indhold {
+            box-sizing: border-box;
+            background-color: lightgray;
+            width: 90vw;
+            height: 90vh;
+            margin: auto;
+        }
+
+        #luk {
+            box-sizing: border-box;
+            text-align: right;
+            padding-right: 1em;
+        }
+
+        #luk button {
+            font-size: 2em;
+        }
     </style>
 
 
@@ -68,6 +95,11 @@
     </header>
 
     <main>
+        <div id="popup">
+            <div id="luk"></div>
+            <div id="indhold"></div>
+        </div>
+
         <section id="liste"></section>
     </main>
 
@@ -94,16 +126,32 @@
                 console.log("viser retter");
                 dest.innerHTML = "";
                 alleRetter.forEach(ret => {
-                    if (filter == "alle" || filter == ret.kategori)(
-                        dest.innerHTML += `
+                    if (filter == "alle" || filter == ret.kategori) {
+                        let template = `
                             <div class="ret">
                                 <img src="imgs/small/${ret.billede}-sm.jpg">
                                 <h2>${ret.navn}</h2>
                                 <p>${ret.kort} <br><br> Pris: ${ret.pris},-</p>
                             </div>`
-                    )
+                        dest.insertAdjacentHTML("beforeend", template);
+                        dest.lastElementChild.addEventListener("click", åbn);
+
+                        function åbn() {
+                            document.querySelector("#indhold").innerHTML = `
+                            <div class="ret">
+                                <img src="imgs/small/${ret.billede}-sm.jpg">
+                                <h2>${ret.navn}</h2>
+                                <p>${ret.kort} <br><br> Pris: ${ret.pris},-</p>
+                            </div>`;
+                            document.querySelector("#popup").style.display = "block";
+                        }
+                    }
                 })
             }
+
+            document.querySelector("#luk button").addEventListener("click", () => {
+                document.querySelector("#popup").style.display = "none";
+            })
 
             document.querySelectorAll(".filter").forEach(elm => {
                 elm.addEventListener("click", filtrering);
@@ -123,7 +171,6 @@
             getJson();
 
         }
-
     </script>
 </body>
 

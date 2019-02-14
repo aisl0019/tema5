@@ -61,27 +61,30 @@
         document.addEventListener("DOMContentLoaded", start);
 
         function start() {
+            console.log("starter");
             let dest = document.querySelector("#liste");
 
             async function getJson() {
+                console.log("getting json");
                 let jsonData = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1jxxxFoWBuMJ1qhQ9BQIAyKHmP38XtAF9_sQr0xo5JLo");
                 alleRetter = await jsonData.json();
 
-                retter.forEach(obj => {
+                alleRetter.forEach(obj => {
                     ret = obj;
                 })
 
-                visRetter();
+                åbn();
             }
 
             function åbn() {
+                console.log("åbner indhold");
                 document.querySelector("#indhold").innerHTML = `
                     <div class="ret">
-                        <img src="imgs/small/${ret.billede}-sm.jpg">
+                        <img src="imgs/large/${ret.billede}.jpg">
                         <h2>${ret.navn}</h2>
                         <p>Beskrivelse: ${ret.lang} <br><br> Pris: ${ret.pris},-</p>
                     </div>`;
-            };
+            }
 
             document.querySelector("#luk button").addEventListener("click", () => {
                 location.href = "kald.html"

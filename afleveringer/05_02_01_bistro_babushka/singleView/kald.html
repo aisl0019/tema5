@@ -74,13 +74,17 @@
         #luk button {
             font-size: 2em;
         }
-
     </style>
 
 
 </head>
 
 <body>
+    <div id="singleview">
+        <div id="luk"><button>X</button></div>
+        <div id="indhold"></div>
+    </div>
+
     <header>
         <img src="imgs/header.png" alt="header">
 
@@ -96,11 +100,6 @@
     </header>
 
     <main>
-        <div id="singleview">
-            <div id="luk"><button>X</button></div>
-            <div id="indhold"></div>
-        </div>
-
         <section id="liste"></section>
     </main>
 
@@ -140,9 +139,10 @@
                         });
 
                         function åbn() {
+                            console.log("åbner singleview");
                             document.querySelector("#indhold").innerHTML = `
                             <div class="ret">
-                                <img src="imgs/small/${ret.billede}-sm.jpg">
+                                <img src="imgs/large/${ret.billede}.jpg">
                                 <h2>${ret.navn}</h2>
                                 <p>${ret.kort} <br><br> Pris: ${ret.pris},-</p>
                             </div>`;
@@ -174,7 +174,6 @@
             getJson();
 
         }
-
     </script>
 </body>
 

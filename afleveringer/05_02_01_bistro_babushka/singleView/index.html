@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bistro Babushka</title>
+
+    <style>
+        #liste {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .ret {
+            background-color: white;
+            margin: 1%;
+        }
+
+        h1 {
+            font-family: 'Arial', sans-serif;
+        }
+
+        h2 {
+            padding: 0% 5% 0% 5%;
+            font-family: 'Arial', sans-serif;
+        }
+
+        p {
+            font-size: 1rem;
+            padding: 0% 5% 0% 5%;
+            font-family: 'Arial', sans-serif;
+        }
+
+        nav {
+            margin-top: 1.5%;
+        }
+
+        .valgt {
+            background-color: red;
+        }
+
+        .ret:nth-child(odd) {
+            background-color: lightgray;
+        }
+
+        /* SINGLE VIEW */
+        #singleview {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            background-color: red;
+            display: none;
+        }
+
+        #indhold {
+            box-sizing: border-box;
+            background-color: lightgray;
+            width: 90vw;
+            height: 90vh;
+            margin: auto;
+        }
+
+        #luk {
+            box-sizing: border-box;
+            text-align: right;
+            padding-right: 1em;
+        }
+
+        #luk button {
+            font-size: 2em;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div id="singleview">
+        <div id="luk"><button>X</button></div>
+        <div id="indhold"></div>
+    </div>
+
+    <header>
+        <img src="imgs/header.png" alt="header">
+
+        <nav class="menu">
+            <button class="filter valgt" data-hold="alle">Alle</button>
+            <button class="filter" data-hold="forretter">Forretter</button>
+            <button class="filter" data-hold="hovedretter">Hovedretter</button>
+            <button class="filter" data-hold="desserter">Desserter</button>
+            <button class="filter" data-hold="drikkevarer">Drikkevarer</button>
+        </nav>
+
+        <h1>Menu</h1>
+    </header>
+
+    <main>
+        <section id="liste"></section>
+    </main>
+
+    <footer></footer>
+
+    <script>
+        let alleRetter = [];
+        let filter = "alle";
+
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            console.log("starter");
+            let dest = document.querySelector("#liste");
+            let temp = document.querySelector("template");
+
+            async function getJson() {
+                let jsonData = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1jxxxFoWBuMJ1qhQ9BQIAyKHmP38XtAF9_sQr0xo5JLo");
+                alleRetter = await jsonData.json();
+                visRetter();
+            }
+
+            function visRetter() {
+                console.log("viser retter");
+                dest.innerHTML = "";
+                alleRetter.forEach(ret => {
+                    if (filter == "alle" || filter == ret.kategori) {
+                        let template = `
+                            <div class="ret">
+                                <img src="imgs/small/${ret.billede}-sm.jpg">
+                                <h2>${ret.navn}</h2>
+                                <p>${ret.kort} <br><br> Pris: ${ret.pris},-</p>
+                            </div>`
+                        dest.insertAdjacentHTML("beforeend", template);
+                        dest.lastElementChild.addEventListener("click", () => {
+                            location.href = "singleView.html?id=" + ret.id;
+                        });
+
+                        function åbn() {
+                            console.log("åbner singleview");
+                            document.querySelector("#indhold").innerHTML = `
+                            <div class="ret">
+                                <img src="imgs/large/${ret.billede}.jpg">
+                                <h2>${ret.navn}</h2>
+                                <p>${ret.kort} <br><br> Pris: ${ret.pris},-</p>
+                            </div>`;
+                            document.querySelector("#singleview").style.display = "block";
+                        }
+                    }
+                })
+            }
+
+            document.querySelector("#luk button").addEventListener("click", () => {
+                document.querySelector("#singleview").style.display = "none";
+            })
+
+            document.querySelectorAll(".filter").forEach(elm => {
+                elm.addEventListener("click", filtrering);
+            })
+
+            function filtrering() {
+                console.log("filtrerer retter");
+                filter = this.getAttribute("data-hold");
+                document.querySelector("h1").textContent = this.textContent;
+                document.querySelectorAll(".filter").forEach(elm => {
+                    elm.classList.remove("valgt");
+                })
+                this.classList.add("valgt");
+                visRetter();
+            }
+
+            getJson();
+
+        }
+    </script>
+</body>
+
+</html>

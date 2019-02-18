@@ -49,12 +49,13 @@
             background-color: lightgray;
         }
 
-        /* SINGLE VIEW */
-        #singleview {
+        /* POPUP */
+        #popup {
             width: 100vw;
             height: 100vh;
             position: fixed;
             background-color: red;
+            display: none;
         }
 
         #indhold {
@@ -63,6 +64,10 @@
             width: 90vw;
             height: 90vh;
             margin: auto;
+        }
+
+        #indhold img {
+            width: 50%;
         }
 
         #luk {
@@ -80,7 +85,8 @@
 </head>
 
 <body>
-    <div id="singleview">
+
+    <div id="popup">
         <div id="luk"><button>X</button></div>
         <div id="indhold"></div>
     </div>
@@ -134,26 +140,23 @@
                                 <p>${ret.kort} <br><br> Pris: ${ret.pris},-</p>
                             </div>`
                         dest.insertAdjacentHTML("beforeend", template);
-                        dest.lastElementChild.addEventListener("click", () => {
-                            location.href = "singleView.html?lang=" + ret.lang;
-                        });
+                        dest.lastElementChild.addEventListener("click", åbn);
 
                         function åbn() {
-                            console.log("åbner singleview");
                             document.querySelector("#indhold").innerHTML = `
-                            <div class="ret">
-                                <img src="imgs/large/${ret.billede}.jpg">
-                                <h2>${ret.navn}</h2>
-                                <p>${ret.kort} <br><br> Pris: ${ret.pris},-</p>
-                            </div>`;
-                            document.querySelector("#singleview").style.display = "block";
+                    <div class="ret">
+                        <img src="imgs/large/${ret.billede}.jpg">
+                        <h2>${ret.navn}</h2>
+                        <p>Beskrivelse: ${ret.lang} <br><br> Pris: ${ret.pris},-</p>
+                    </div>`;
+                            document.querySelector("#popup").style.display = "block";
                         }
                     }
                 })
             }
 
             document.querySelector("#luk button").addEventListener("click", () => {
-                document.querySelector("#singleview").style.display = "none";
+                document.querySelector("#popup").style.display = "none";
             })
 
             document.querySelectorAll(".filter").forEach(elm => {

@@ -53,7 +53,7 @@
 
     <script>
         let urlParams = new URLSearchParams(window.location.search);
-        let github = urlParams.get("github");
+        let id = urlParams.get("id");
 
         let alleRetter = [];
         let ret;
@@ -87,7 +87,7 @@
             }
 
             document.querySelector("#luk button").addEventListener("click", () => {
-                location.href = "kald.html"
+                location.href = "index.html"
             });
 
             getJson();
